@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ExtJS_Store.Models.Order>
+
+@{
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipment_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shipment_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.OrderID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.OrderID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.OrderID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
