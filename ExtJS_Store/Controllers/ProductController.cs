@@ -142,7 +142,5 @@ namespace ExtJS_Store.Controllers
             }
             base.Dispose(disposing);
         }
-
-    */
     }
 }
