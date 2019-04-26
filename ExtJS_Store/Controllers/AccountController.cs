@@ -67,6 +67,51 @@ namespace ExtJS_Store.Controllers
             return View();
         }
 
+
+        public async Task<ActionResult> GetLogin(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await UserManager.FindAsync(model.Email, model.Password);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Неверный логин или пароль.");
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        data = "LOL"
+                    }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new
+            {
+                data = model
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> TestLogin(string model)
+        {
+            User user = await UserManager.FindAsync("2@mail.ru", "111111");
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Неверный логин или пароль.");
+                return Json(new
+                {
+                    data = model
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new
+                {
+                    data = user
+                }, JsonRequestBehavior.AllowGet);
+            } 
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model, string returnUrl)

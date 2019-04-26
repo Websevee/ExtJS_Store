@@ -13,13 +13,30 @@ namespace ExtJS_Store.Controllers
 {
     public class ProductController : Controller
     {
-        private ApplicationContext db = new ApplicationContext();
+        private UnitOfWork unitOfWork = new UnitOfWork();
+
+        // ---- API
+        List<Product> _list = new List<Product>();
+
+        /*public ActionResult GetData()
+        {
+            _list = db.Products.ToList();
+            return Json(new
+            {
+                data = _list,
+                success = true
+            }, JsonRequestBehavior.AllowGet);
+        }*/
 
         // GET: Product
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            var products = unitOfWork.ProductRepository.Get();
+            return View(products.ToList());
         }
+
+
+        /*
 
         // GET: Product/Details/5
         public ActionResult Details(int? id)
@@ -35,13 +52,14 @@ namespace ExtJS_Store.Controllers
             }
             return View(product);
         }
-
+        */
         // GET: Product/Create
         public ActionResult Create()
         {
+
             return View();
         }
-
+        
         // POST: Product/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -51,14 +69,14 @@ namespace ExtJS_Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
+                unitOfWork.ProductRepository.Insert(product);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
 
             return View(product);
         }
-
+        
         // GET: Product/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -66,7 +84,7 @@ namespace ExtJS_Store.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = unitOfWork.ProductRepository.GetByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -83,13 +101,13 @@ namespace ExtJS_Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
+                unitOfWork.ProductRepository.Update(product);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View(product);
         }
-
+        
         // GET: Product/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -97,7 +115,7 @@ namespace ExtJS_Store.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
+            Product product = unitOfWork.ProductRepository.GetByID(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -110,9 +128,9 @@ namespace ExtJS_Store.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            Product product = unitOfWork.ProductRepository.GetByID(id);
+            unitOfWork.ProductRepository.Delete(id);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
 
@@ -120,9 +138,11 @@ namespace ExtJS_Store.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unitOfWork.Dispose();
             }
             base.Dispose(disposing);
         }
+
+    */
     }
 }
