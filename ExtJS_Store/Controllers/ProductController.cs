@@ -15,19 +15,68 @@ namespace ExtJS_Store.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
-        // ---- API
-        List<Product> _list = new List<Product>();
 
-        /*public ActionResult GetData()
+        // JSON
+        public ActionResult GetData()
         {
-            _list = db.Products.ToList();
+            var _list = unitOfWork.ProductRepository.Get();
             return Json(new
             {
                 data = _list,
                 success = true
             }, JsonRequestBehavior.AllowGet);
-        }*/
+        }
 
+        [HttpPost]
+        public JsonResult CreateNew([Bind(Include = "Code,Name,Price,Category")] Product product)
+        {
+            bool success = false;
+            string message = "no record found";
+
+            if (ModelState.IsValid)
+            {
+                unitOfWork.ProductRepository.Insert(product);
+                unitOfWork.Save();
+                success = true;
+                message = "TRUE";
+            }
+
+            return Json(new { product, success, message });
+        }
+
+        [HttpPost]
+        public JsonResult EditItem([Bind(Include = "ID,Code,Name,Price,Category")] Product product)
+        {
+            bool success = false;
+            string message = "no record found";
+
+            if (ModelState.IsValid)
+            {
+                unitOfWork.ProductRepository.Update(product);
+                unitOfWork.Save();
+                success = true;
+                message = "TRUE";
+            }
+
+            return Json(new { product, success, message });
+        }
+
+        [HttpPost]
+        public JsonResult DeleteItem(int id)
+        {
+            bool success = false;
+            string message = "no record found";
+
+            unitOfWork.ProductRepository.Delete(id);
+            unitOfWork.Save();
+            success = true;
+            message = "TRUE";
+
+            return Json(new { success, message });
+        }
+
+
+        // NOT JSON!!!!!!!!!!!!!!!!!
         // GET: Product
         public ActionResult Index()
         {

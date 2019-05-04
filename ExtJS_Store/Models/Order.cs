@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExtJS_Store.Models
@@ -11,10 +12,10 @@ namespace ExtJS_Store.Models
     public class Order
     {
         [Key]
-        public int OrderID { get; set; }
+        public int OrderId { get; set; }
 
         [Required]
-        public int CustomerID { get; set; }
+        public int CustomerId { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -27,5 +28,6 @@ namespace ExtJS_Store.Models
         public int Order_Number { get; set; }
 
         public string Status { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }
