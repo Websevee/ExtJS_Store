@@ -1,25 +1,35 @@
-Ext.define('MyApp.view.main.Main', {
-    extend: 'Ext.tab.Panel',
-    alias: 'widget.main',
-
-    title: 'Home',
-
+Ext.define('Front.view.main.Main', {
+    extend: 'Ext.container.Viewport',
+    xtype: 'main',
+    layout: 'fit',
+    
     initComponent: function() {
-        this.title = 'Home',
-        this.html = '<h1 class="main-banner">Hello World!</h1>',
-        this.items = [{
-            title: 'Home',
-            html: '<h1 class="main-banner">Hello World!</h1>',
-            items: [{
-                xtype: 'button',
-                text: 'Go'
-            }]
-        }, {
-            title: 'Notifications'
-        }, {
-            title: 'Settings'
-        }];
-         
-        this.callParent(arguments);
+        this.items = {
+            dockedItems: [
+                {
+                    dock: 'top',
+                    xtype: 'tabpanel',
+
+                    items: [
+                        {
+                            xtype: 'store',
+                        }, {
+                            xtype: 'listmanager',
+                        }, {
+                            title: 'Cart',
+                            html: 'Panda<br>Internet Radio'
+                        }, {
+                            xtype: 'profile'
+                        }
+                    ]
+                },{
+                    dock: 'bottom',
+                    title: 'Состояние системы + состояния раздела + сообщения'
+                },
+
+            ]
+        };
+        
+        this.callParent();
     }
 });

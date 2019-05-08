@@ -11,6 +11,7 @@ using ExtJS_Store.Models;
 
 namespace ExtJS_Store.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private UnitOfWork unitOfWork = new UnitOfWork();

@@ -68,47 +68,58 @@ namespace ExtJS_Store.Controllers
         }
 
 
-        public async Task<ActionResult> GetLogin(LoginModel model)
+        // AJAAAAAAAAAAAAAAAAAAAX
+
+        //[HttpPost]
+        public async Task<JsonResult> NowUser()
+        {
+            User user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            if (User.Identity.IsAuthenticated)
+            {
+                return Json(new
+                {
+                    user,
+                    success = true
+                }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { data = "NO Login!" }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> TestLogin(LoginModel model)
         {
             if (ModelState.IsValid)
             {
                 User user = await UserManager.FindAsync(model.Email, model.Password);
-                if (user == null)
+                if (user != null)
                 {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
-                }
-                else
-                {
+                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user,
+                                            DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
                     return Json(new
                     {
-                        data = "LOL"
+                        user,
+                        success = true
                     }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new
             {
-                data = model
+                success = false
             }, JsonRequestBehavior.AllowGet);
+
         }
 
-        public async Task<ActionResult> TestLogin(string model)
+        [HttpPost]
+        public JsonResult TestLogOff()
         {
-            User user = await UserManager.FindAsync("2@mail.ru", "111111");
-            if (user == null)
-            {
-                ModelState.AddModelError("", "Неверный логин или пароль.");
-                return Json(new
-                {
-                    data = model
-                }, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(new
-                {
-                    data = user
-                }, JsonRequestBehavior.AllowGet);
-            } 
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return Json(new { success = true});
         }
 
 
@@ -140,6 +151,37 @@ namespace ExtJS_Store.Controllers
             ViewBag.returnUrl = returnUrl;
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<JsonResult> TestRegister(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User { UserName = model.Email, Email = model.Email, Year = model.Year };
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user,
+                                            DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
+                    return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    foreach (string error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
+                }
+            }
+            return Json(new { success = false }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();

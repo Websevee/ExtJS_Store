@@ -1,28 +1,16 @@
-Ext.define('Front.view.Store', {
+Ext.define('Front.view.store.Store', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.store',
+    xtype: 'store',
     store: 'Products',
     
-    title: 'My Магазин',
+    title: 'Store',
+    height: 500,
 
-    dockedItems: [{
-        xtype: 'toolbar',
-        dock: 'bottom',
-
-        items: [
-            {
-                xtype: 'button',
-                text: 'Add',
-                action: 'onAdd'
-            }
-        ]
-    }],
+    beforeShow: function () {
+        this.getStore().load();
+    },
 
     columns: [
-        {
-            dataIndex: 'ID',
-            text: 'ID'  
-        },
         {
             dataIndex: 'Code',
             text: 'Code'  

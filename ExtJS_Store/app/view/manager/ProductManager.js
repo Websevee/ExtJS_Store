@@ -1,6 +1,6 @@
-Ext.define('Front.view.Product', {
+Ext.define('Front.view.manager.ProductManager', {
     extend: 'Ext.window.Window',
-    alias: 'widget.productwindow',
+    xtype: 'productwindow',
  
     title: 'Продукт',
     layout: 'fit',
@@ -10,11 +10,6 @@ Ext.define('Front.view.Product', {
         this.items = [{
                 xtype: 'form',
                 items: [
-                    /*{
-                        xtype: 'textfield',
-                        name : 'ID',
-                        fieldLabel: 'ID'
-                    },*/
                     {
                         xtype: 'textfield',
                         name : 'Code',
@@ -35,17 +30,15 @@ Ext.define('Front.view.Product', {
                 ]
             }];
         this.dockedItems=[{
-            xtype:'toolbar',
+            xtype: 'toolbar',
             docked: 'top',
             items: [
                 {
-                    text:'Создать',
-                    //iconCls:'new-icon',
+                    text: 'Создать',
                     action: 'create'
                 },
                 {
-                    text:'Удалить',
-                    //iconCls:'new-icon',
+                    text: 'Удалить',
                     action: 'delete'
                 }
             ]
@@ -53,7 +46,6 @@ Ext.define('Front.view.Product', {
         this.buttons = [
             {
                 text: 'Сохранить',
-                //scope: this,
                 action: 'save'
             },{
                 text: 'Очистить',
