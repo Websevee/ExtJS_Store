@@ -1,5 +1,6 @@
 Ext.define('Front.controller.User', {
     extend: 'Ext.app.Controller',
+    
     views: ['user.Login', 'main.Main', 'user.Profile'],
 
     init: function() {

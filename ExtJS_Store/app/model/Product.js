@@ -1,4 +1,4 @@
 Ext.define('Front.model.Product', {
     extend: 'Ext.data.Model',
-    fields: ['ID', 'Code', 'Name', 'Price', 'Category'],
+    fields: ['Id', 'Code', 'Name', 'Price', 'Category'],
 });

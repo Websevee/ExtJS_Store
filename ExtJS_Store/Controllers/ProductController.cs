@@ -29,6 +29,7 @@ namespace ExtJS_Store.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles="admin")]
         public JsonResult CreateNew([Bind(Include = "Code,Name,Price,Category")] Product product)
         {
             bool success = false;

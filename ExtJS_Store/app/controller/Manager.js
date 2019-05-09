@@ -42,9 +42,12 @@ Ext.define('Front.controller.Manager', {
             form   = win.down('form'),
             values = form.getValues();
         Ext.Ajax.request({
+            type: 'json',
             url: '/Product/CreateNew',
             params: values,
             success: function(response, options){
+                console.log(response.responseText == "");
+                //console.log(response.responseText)
                 var data=Ext.decode(response.responseText);
                 if(data.success){
                     Ext.Msg.alert('Создание',data.message);
@@ -54,6 +57,9 @@ Ext.define('Front.controller.Manager', {
                 else{
                     Ext.Msg.alert('Создание','Не удалось добавить книгу в библиотеку');
                 }
+            },
+            failure: function(response, options){
+                console.log(response)
             }
         });
     },
@@ -62,7 +68,7 @@ Ext.define('Front.controller.Manager', {
         var win    = button.up('window'),
             form   = win.down('form'),
             values = form.getValues(),
-            id = form.getRecord().get('ID');
+            id = form.getRecord().get('Id');
             values.id=id;
         Ext.Ajax.request({
             url: '/Product/EditItem',
@@ -84,7 +90,7 @@ Ext.define('Front.controller.Manager', {
     deleteProduct: function(button) {
         var win    = button.up('window'),
             form   = win.down('form'),
-            id = form.getRecord().get('ID');
+            id = form.getRecord().get('Id');
         Ext.Ajax.request({
             url: '/Product/DeleteItem',
             params: {id:id},
@@ -103,9 +109,8 @@ Ext.define('Front.controller.Manager', {
         });
     },
 
-    clearForm: function(grid, record) {
-        var view = Ext.widget('productmanager');
-        view.down('form').getForm().reset();
+    clearForm: function(button, record) {
+        button.up('productmanager').down('form').getForm().reset();
     }
 
     

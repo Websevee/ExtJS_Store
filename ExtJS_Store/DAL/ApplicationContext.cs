@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using ExtJS_Store.Models.User;
+using ExtJS_Store.Models;
 
 namespace ExtJS_Store.DAL
 {
@@ -13,8 +14,12 @@ namespace ExtJS_Store.DAL
             return new ApplicationContext();
         }
 
-        public System.Data.Entity.DbSet<ExtJS_Store.Models.Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
-        public System.Data.Entity.DbSet<ExtJS_Store.Models.Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

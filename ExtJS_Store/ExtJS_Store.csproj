@@ -165,6 +165,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="DAL\ApplicationContext.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
@@ -191,12 +192,17 @@
     <Compile Include="Migrations\201905041929219_models.Designer.cs">
       <DependentUpon>201905041929219_models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905082100193_Cart.cs" />
+    <Compile Include="Migrations\201905082100193_Cart.Designer.cs">
+      <DependentUpon>201905082100193_Cart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\User\CreateRoleModel.cs" />
     <Compile Include="Models\User\EditModel.cs" />
     <Compile Include="Models\User\EditRoleModel.cs" />
@@ -3738,6 +3744,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3767,6 +3774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905041929219_models.resx">
       <DependentUpon>201905041929219_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905082100193_Cart.resx">
+      <DependentUpon>201905082100193_Cart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

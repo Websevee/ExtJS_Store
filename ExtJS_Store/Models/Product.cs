@@ -4,7 +4,7 @@ namespace ExtJS_Store.Models
 {
     public class Product
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

@@ -8,6 +8,7 @@ namespace ExtJS_Store.DAL
         private ApplicationContext context = new ApplicationContext();
         private GenericRepository<Order> orderRepository;
         private GenericRepository<Product> productRepository;
+        private GenericRepository<Cart> cartRepository;
 
         public GenericRepository<Order> OrderRepository
         {
@@ -32,6 +33,19 @@ namespace ExtJS_Store.DAL
                     this.productRepository = new GenericRepository<Product>(context);
                 }
                 return productRepository;
+            }
+        }
+
+        public GenericRepository<Cart> CartRepository
+        {
+            get
+            {
+
+                if (this.cartRepository == null)
+                {
+                    this.cartRepository = new GenericRepository<Cart>(context);
+                }
+                return cartRepository;
             }
         }
 

@@ -2,11 +2,13 @@ Ext.define('Front.view.store.Product', {
     extend: 'Ext.window.Window',
     xtype: 'product',
  
-    title: '{Name}',
+    //title: '',
     layout: 'fit',
     autoShow: true,
     //closable: false,
- 
+
+    
+    
     initComponent: function() {
         this.items = [{
                 xtype: 'form',
@@ -28,9 +30,21 @@ Ext.define('Front.view.store.Product', {
                         name : 'Category',
                         fieldLabel: 'Category'
                     },
+                ],
+                
+                buttons: [
+                    {
+                        text: 'Add to Cart',
+                        action: 'onAddToCart'
+                    }, {
+                        text: 'Cancel',
+                        handler: function(){
+                            this.up('window').close();
+                            
+                         }
+                    }
                 ]
             }];
- 
         this.callParent(arguments);
     }
 });

@@ -1,6 +1,6 @@
 Ext.define('Front.view.manager.ProductManager', {
     extend: 'Ext.window.Window',
-    xtype: 'productwindow',
+    xtype: 'productmanager',
  
     title: 'Продукт',
     layout: 'fit',
@@ -38,8 +38,8 @@ Ext.define('Front.view.manager.ProductManager', {
                     action: 'create'
                 },
                 {
-                    text: 'Удалить',
-                    action: 'delete'
+                    text: 'Очистить',
+                    action: 'clear'
                 }
             ]
         }];
@@ -48,9 +48,9 @@ Ext.define('Front.view.manager.ProductManager', {
                 text: 'Сохранить',
                 action: 'save'
             },{
-                text: 'Очистить',
+                text: 'Удалить',
                 scope: this,
-                action: 'clear'
+                action: 'delete'
             }
         ];
  

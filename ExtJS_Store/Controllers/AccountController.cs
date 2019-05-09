@@ -23,6 +23,14 @@ namespace ExtJS_Store.Controllers
             }
         }
 
+        private MyRoleManager RoleManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().GetUserManager<MyRoleManager>();
+            }
+        }
+
         //---- REGISTER
         public ActionResult Register()
         {
@@ -74,11 +82,17 @@ namespace ExtJS_Store.Controllers
         public async Task<JsonResult> NowUser()
         {
             User user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            
+
+
             if (User.Identity.IsAuthenticated)
             {
+                var admin = user.Roles.Any(elem => elem.RoleId == RoleManager.FindByName("admin").Id);
+
                 return Json(new
                 {
                     user,
+                    admin,
                     success = true
                 }, JsonRequestBehavior.AllowGet);
             }

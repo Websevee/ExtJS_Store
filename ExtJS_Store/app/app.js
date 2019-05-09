@@ -5,7 +5,7 @@ Ext.application({
     
     models: ['Product'],    
     stores: ['Products'],
-    controllers: ['User', 'Manager', 'Store'],
+    controllers: ['User', 'Manager', 'Store', 'Cart'],
     
 
     launch: function () {
@@ -16,6 +16,8 @@ Ext.application({
                 if(data.success){
                     console.log('Main',data.user);
                     Ext.widget('main');
+
+                    localStorage.setItem('user', data.user);
                 }
                 else{
                     console.log('Login',data);

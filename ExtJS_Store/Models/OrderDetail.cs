@@ -9,8 +9,8 @@ namespace ExtJS_Store.Models
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
-        public int ItemId { get; set; }
-        public int ItemsCount { get; set; }
-        public int ItemPrice { get; set; }
+        public int ProductId { get; set; }
+        public int ProductCount { get; set; }
+        public int ProductPrice { get; set; }
     }
 }

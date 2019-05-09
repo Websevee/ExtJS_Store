@@ -28,6 +28,9 @@ namespace ExtJS_Store.Models
         public int Order_Number { get; set; }
 
         public string Status { get; set; }
+
+        public decimal Total { get; set; }
+
         public List<OrderDetail> OrderDetails { get; set; }
     }
 }

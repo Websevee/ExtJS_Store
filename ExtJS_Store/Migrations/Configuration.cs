@@ -38,7 +38,7 @@ namespace ExtJS_Store.Migrations
             // если создание пользователя прошло успешно
             if (result.Succeeded)
             {
-                // добавляем для пользователя роль
+                // добавляем для пользователя роли
                 userManager.AddToRole(user.Id, role1.Name);
                 userManager.AddToRole(user.Id, role2.Name);
             }

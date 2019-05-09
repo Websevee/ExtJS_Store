@@ -14,10 +14,7 @@ Ext.define('Front.view.main.Main', {
                         {
                             xtype: 'store',
                         }, {
-                            xtype: 'listmanager',
-                        }, {
-                            title: 'Cart',
-                            html: 'Panda<br>Internet Radio'
+                            xtype: 'cart',
                         }, {
                             xtype: 'profile'
                         }
