@@ -83,9 +83,7 @@ namespace ExtJS_Store.Controllers
         {
             User user = await UserManager.FindByEmailAsync(User.Identity.Name);
             
-
-
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated && user != null)
             {
                 var admin = user.Roles.Any(elem => elem.RoleId == RoleManager.FindByName("admin").Id);
 
