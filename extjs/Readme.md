@@ -1,3 +1,0 @@
-# Extjs application
-
-moderndesktopminimal template
